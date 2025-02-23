@@ -1,3 +1,4 @@
+let lastTs;
 // Function to fetch live data
 async function getLiveData() {
     try {
@@ -6,11 +7,18 @@ async function getLiveData() {
             throw new Error('Network response was not ok');
         }
         const data = await response.json(); 
-        console.log();
-        // Parse JSON response
-        console.log("Fetched Data:", data); // Log the data to check the structure
+      
+        console.log("Fetched Data:", data.data[1].ts,lastTs);
+         if(lastTs===data.data[1].ts){
+            console.log("no update");
+            return
+         }else{
+            console.log("update");
+            
+            lastTs=data.data[1].ts
+             updatePage(data.data[1]); // Pass only the 'd' object
+         }
   
-        updatePage(data.data[1]); // Pass only the 'd' object
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
