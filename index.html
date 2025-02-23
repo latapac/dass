@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PACMAC -Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top" style="background-color: white;">
+    
+    <!-- Page Wrapper -->
+    <div id="wrapper" style="background-color: white;">
+<!--         
+        Sidebar -->
+       
+            
+            <!-- Sidebar - Brand -->
+            
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+                 
+            
+            <!-- Divider -->
+           
+        
+        <!-- Divider -->
+        <!-- <hr class="sidebar-divider">
+        
+        Heading -->
+        <!-- <div class="sidebar-heading">
+            Addons
+            </div> -->
+            
+          
+           
+                  
+        </ul> 
+        <!-- End of Sidebar -->
+        
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            
+            <!-- Main Content -->
+            <div id="content">
+                
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <img src="img/logo.png" alt="" style="height: 42px;">&nbsp;&nbsp;&nbsp;&nbsp;<div class="dropdown" style="position: relative; display: inline-block;">
+                        <div class="dropdown-toggle" onclick="toggleDropdown()" 
+                            style="background: white; color: black; border: 1px solid #ccc; padding: 10px; cursor: pointer; 
+                            display: flex; align-items: center; justify-content: space-between; 
+                            width: 200px; border-radius: 5px;">
+                            Machine No: 80
+                            <span style="margin-left: 10px; border: white; border-width: 0 2px 2px 0; 
+                            display: inline-block; padding: 4px; transform: rotate(45deg);
+                             transition: transform 0.2s;"></span>
+                        </div>
+                        <div class="dropdown-content" id="dropdownContent" 
+                            style="display: none; position: absolute; background: white; 
+                            border: 1px solid #ccc; width: 120px; 
+                            box-shadow: 2px 2px 5px rgba(0,0,0,0.2); z-index: 1; border-radius: 5px; top: 40px;">
+                            <div onclick="selectNumber(1)" style="padding: 10px; cursor: pointer; text-align: center;">80</div>
+                            <div onclick="selectNumber(2)" style="padding: 10px; cursor: pointer; text-align: center;">81</div>
+                            <div onclick="selectNumber(3)" style="padding: 10px; cursor: pointer; text-align: center;">82</div>
+                            <div onclick="selectNumber(4)" style="padding: 10px; cursor: pointer; text-align: center;">83</div>
+                            <div onclick="selectNumber(5)" style="padding: 10px; cursor: pointer; text-align: center;">84</div>
+                        </div>
+                    </div>
+                    
+                    <script>
+                        function toggleDropdown() {
+                            let dropdown = document.getElementById("dropdownContent");
+                            let arrow = document.querySelector(".arrow");
+                            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+                            arrow.style.transform = (dropdown.style.display === "block") ? "rotate(225deg)" : "rotate(45deg)";
+                        }
+                    
+                        function selectNumber(num) {
+                            document.querySelector(".dropdown-toggle").childNodes[0].nodeValue = "Selected: " + num;
+                            toggleDropdown();
+                        }
+                    
+                        document.addEventListener("click", function(event) {
+                            let dropdown = document.querySelector(".dropdown");
+                            if (!dropdown.contains(event.target)) {
+                                document.getElementById("dropdownContent").style.display = "none";
+                                document.querySelector(".arrow").style.transform = "rotate(45deg)";
+                            }
+                        });
+                    </script>
+&nbsp;&nbsp;&nbsp;
+<button id="statusButton" style="width: 20px; height: 20px; border-radius: 50%; border: none; background:green;"></button>
+
+<script>
+    let lastDataTime = 0; // Store the timestamp of the last data update
+    const CHECK_INTERVAL = 20000; // 20 seconds
+    const DATA_TIMEOUT = 20000; // Data must arrive within 20 seconds to stay green
+
+    function updateStatus() {
+        let button = document.getElementById("statusButton");
+        let currentTime = Date.now();
+        
+        // If data was received in the last 30 seconds, keep it green; otherwise, turn red
+        if (currentTime - lastDataTime <= DATA_TIMEOUT) {
+            button.style.background = "green";
+        } else {
+            button.style.background = "red";
+        }
+    }
+   
+
+
+    function onDataReceived() {
+        lastDataTime = Date.now(); // Update the last received time
+    }
+
+    // Check status every 30 seconds
+    setInterval(updateStatus, CHECK_INTERVAL);
+
+    // Simulate real data updates every 5 seconds (Replace this with actual data-fetching logic)
+    setInterval(onDataReceived, 5000);
+</script>
+<a href="oee.html" style="margin:35px;display: flex; 
+color: black; text-decoration: none;background-color: lightgrey; 
+border: 0.5px solid grey; border-radius: 5px; padding: 10px 20px;
+ font-size: 16px; text-align: center;align-items: center;justify-content: center;
+  cursor: pointer;height:34px;width:130px">
+    OEE Chart
+</a>
+                    
+                    <!-- Sidebar Toggle (Topbar) -->
+                  
+                    <!-- Topbar Search -->
+                    <form
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                   
+                    </form>
+                    
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        
+                        
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+
+                           
+                        
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="messagesDropdown">
+                        <h6 class="dropdown-header">
+                            Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                        alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                            <div class="status-indicator"></div>
+                                        </div>
+                                        <div>
+                                            <div class="text-truncate">I have the photos that you ordered last month, how
+                                                would you like them sent to you?</div>
+                                                <div class="small text-gray-500">Jae Chun · 1d</div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                                alt="...">
+                                                <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <!-- <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                            <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                        </div>
+                                    </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+                        
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div id="dateTimeDisplay" style="font-size: 16px; font-weight: bold;color: black;"></div>
+
+<script>
+    function updateDateTime() {
+        let now = new Date();
+
+        // Get date components
+        let day = now.getDate();
+        let month = now.toLocaleString('default', { month: 'long' }); // Full month name
+        let year = now.getFullYear();
+
+        // Get time components in 12-hour format
+        let hours = now.getHours() % 12 || 12; // Convert to 12-hour format
+        let minutes = now.getMinutes().toString().padStart(2, '0');
+        let amPm = now.getHours() >= 12 ? 'PM' : 'AM';
+
+        // Format date and time
+        let formattedDate = `${month} ${day}, ${year}`;
+        let formattedTime = `${hours}:${minutes} ${amPm}`;
+
+        // Update the display
+        document.getElementById("dateTimeDisplay").innerHTML = `${formattedDate} <br> ${formattedTime}`;
+    }
+
+    // Update every second
+    setInterval(updateDateTime, 1000);
+
+    // Initialize immediately
+    updateDateTime();
+</script>
+&nbsp;&nbsp;&nbsp;
+                             <button style="background-color: white;border-radius: 10px;
+                             width:120px;height:40px;font-size:20px;border:0.5px solid grey" type="submit">Logout</button>
+                        </a> 
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <!-- <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a> -->
+                                <!-- <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a> -->
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                    
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    
+                    <!-- Page Heading -->
+                    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Client Dashboard</h1>
+                        
+                    </div> -->
+                    
+                    <!-- Content Row -->
+                    <div class="row" >
+                        
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Total Production</div>
+                                                <div id="total_production" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                            </div>
+                                            <!-- <div class="col-auto">
+                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Good Production</div>
+                                                <div id="good_production" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                            </div>
+                                            <!-- <div class="col-auto">
+                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            </div> -->
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div  class="text-xs font-weight-bold text-info text-uppercase mb-1">Bad Production
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div id="bad_production"class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <!-- <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                        style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                OEE %</div>
+                                                <div class="oee" class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Content Row -->
+                    
+                    <div class="row" style="display: flex;justify-content: space-evenly;position: relative;flex-direction: row;">
+                        
+                        <!-- Area Chart -->
+                        <div class="col-xl-8 col-lg-7" >
+                            <div class="card shadow mb-4" style="height: 400px;"style="display: flex;">
+                                <!-- Card Header - Dropdown -->
+                                <div 
+                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary" >Overall Details</h6>
+                                    <div class="dropdown no-arrow" >
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <!-- <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                    aria-labelledby="dropdownMenuLink" >
+                                    <div class="dropdown-header">About:</div>
+                                    <a class="dropdown-item" href="#">This component shows the production details shift wise</a>
+                                    
+                                </div>
+                            
+                            </div>
+                                </div>
+                                <!-- Card Body -->
+                                 <br><br>
+                                <h4  style="font-size: 20px;padding-left: 80px;"  class="font-weight-bold"> 
+                                    <span><button style="width: 20px; height: 20px;
+                                     background-color:#FFC107; border: none; border-radius: 50%; cursor: pointer;">
+                                     </button> Availability</span>
+                                <span id="aval" ></span></h4><br>
+                                <h4 style="font-size: 20px;padding-left: 80px;" class="font-weight-bold"> <span><button style="width: 20px; height: 20px;
+                                    background-color: #007BFF; border: none; border-radius: 50%; cursor: pointer;">
+                                    </button> </span>Performance: <span id="perf" ></span></h4><br>
+                                 <h4 style="font-size: 20px;padding-left: 80px;" class=" font-weight-bold"> <span><button style="width: 20px; height: 20px;
+                                    background-color: green; border: none; border-radius: 50%; cursor: pointer;">
+                                    </button> </span>Quality: <span id="qual" ></span></h4>
+                                 
+                                
+                                 
+                                <div style="width: 40%; margin: 20px auto; padding: 20px;
+                                 border-radius: 8px;height: 60%;display: flex;">
+                                    <div style="width:550px;display: inline-grid;">
+
+                                       
+                                    </div>
+                                    <div style="display: flex; justify-content: center;
+                                     align-items: center; width: 100%; min-height: 300px;
+                                     margin-left: 200px;margin-top: -180px;">
+                                        <canvas id="oeeChart" width="300" height="300"></canvas>
+                                    </div> 
+                                    
+                                </div>
+                                   
+                                <script>
+                                    // Fetch the data from the local JSON file
+                                    document.addEventListener('DOMContentLoaded', () => {
+                                        fetch('data.json')
+                                        .then(response => response.json())  // Parse the JSON response
+                                        .then(data => {
+                                          const tableBody = document.getElementById('data-table');
+                                          // Iterate over the data and create table rows for each date
+                                          data.forEach(item => {
+                                              const row = document.createElement('tr');
+                                              
+                                              // Create cells for each column (Date, Total Production, Good Production, Bad Production)
+                                              const dateCell = document.createElement('td');
+                                              dateCell.style.padding = '10px';
+                                              dateCell.style.textAlign = 'left';
+                                              dateCell.style.borderBottom = '1px solid #ddd';
+                                              dateCell.textContent = item.Date;
+                                              
+                                              const totalProductionCell = document.createElement('td');
+                                              totalProductionCell.style.padding = '10px';
+                                              totalProductionCell.style.textAlign = 'left';
+                                              totalProductionCell.style.borderBottom = '1px solid #ddd';
+                                              totalProductionCell.textContent = item.Total_production;
+                                              
+                                            const goodProductionCell = document.createElement('td');
+                                            goodProductionCell.style.padding = '10px';
+                                            goodProductionCell.style.textAlign = 'left';
+                                            goodProductionCell.style.borderBottom = '1px solid #ddd';
+                                            goodProductionCell.textContent = item.Good_production;
+                                            
+                                            const badProductionCell = document.createElement('td');
+                                            badProductionCell.style.padding = '10px';
+                                            badProductionCell.style.textAlign = 'left';
+                                            badProductionCell.style.borderBottom = '1px solid #ddd';
+                                            badProductionCell.textContent = item.Bad_production;
+                                            
+                                            // Append the cells to the row
+                                            row.appendChild(dateCell);
+                                            row.appendChild(totalProductionCell);
+                                            row.appendChild(goodProductionCell);
+                                            row.appendChild(badProductionCell);
+                                            
+                                            // Append the row to the table body
+                                            tableBody.appendChild(row);
+                                        });
+                                        })
+                                        .catch(error => console.error('Error loading the JSON data:', error));
+                                    });
+                                  </script>
+                                  
+                                </div>
+                        </div> 
+                        
+                        <!-- Pie Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4"  style="height: 400px;">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                class="card-header py-3 d-flex flex-row align-items-center" >
+                                <h6 class="m-0 font-weight-bold text-primary">TIMINGS</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <!-- <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i> -->
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">About</div>
+                                            <a class="dropdown-item" href="#">This component shows details of the status of time occupancy of machines.</a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body" style="font-size: 20px;">
+                                    <!-- <div class="chart-pie pt-4 pb-2">
+                                        <canvas id="myPieChart"></canvas>
+                                    </div> -->
+                                    <div class="mt-4 small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Runtime :  <span id="runtime">..</span>
+                                        </span><br>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Stoptime : <span id="stoptime">..</span>
+                                        </span><br>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Errortime : <span id="errortime">..</span>
+                                        </span><br>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Minor Stoppage Time : <span id="minor_stop">..</span>
+                                        </span><br>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-info"></i> Failure Loss Time : <span id="failure_loss">..</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- <div class="status" style="display: inline-flex;">
+                                    <div class="card shadow mb-4" style="width: 400px;">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Running Status</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div style="width: 80%; margin: 20px auto; padding: 20px; background-color: #ffffff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+                                                
+                                                <div style="display: flex; justify-content: center; gap: 20px;">
+                                                     Buttons for Running Status -->
+                                                   
+                                                  <!-- <button id="faultBtn" style="padding: 10px 20px; border-radius: 5px; border: 1px solid #ddd; 
+                                                  background-color: white; color: #333; cursor: pointer;">None</button>
+                                                </div>
+                                                
+                                                <p id="statusText" style="text-align: center; margin-top: 20px; font-size: 18px;">Current Status: None</p>
+                                            </div>
+                                            </div>
+                            </div>
+                        </div> -->
+                        
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Set initial status
+                    let currentStatus = null;
+                    
+                    // DOM elements for buttons
+                    const runningBtn = document.getElementById('runningBtn');
+                    const stopBtn = document.getElementById('stopBtn');
+                    const faultBtn = document.getElementById('faultBtn');
+                  const statusText = document.getElementById('statusText');
+              
+                  // Function to update button styles based on current status
+                  function updateButtonStyles() {
+                      // Reset button styles
+                      runningBtn.style.backgroundColor = 'white';
+                      stopBtn.style.backgroundColor = 'white';
+                      faultBtn.style.backgroundColor = 'white';
+                      
+                      runningBtn.style.color = '#333';
+                      stopBtn.style.color = '#333';
+                    faultBtn.style.color = '#333';
+                    
+                    // Update status based on current status
+                    if (currentStatus === 'Running') {
+                      runningBtn.style.backgroundColor = '#28a745';
+                      runningBtn.style.color = 'white';
+                      statusText.textContent = 'Current Status: Running';
+                    } else if (currentStatus === 'Stop') {
+                        stopBtn.style.backgroundColor = '#dc3545';
+                        stopBtn.style.color = 'white';
+                        statusText.textContent = 'Current Status: Stop';
+                    } else if (currentStatus === 'Fault') {
+                        faultBtn.style.backgroundColor = '#ffc107';
+                        faultBtn.style.color = 'white';
+                        statusText.textContent = 'Current Status: Fault';
+                    }
+                }
+              
+                  // Event listeners for button clicks to change status
+                  runningBtn.addEventListener('click', () => {
+                      currentStatus = 'Running';
+                      updateButtonStyles();
+                    });
+                    
+                    stopBtn.addEventListener('click', () => {
+                        currentStatus = 'Stop';
+                        updateButtonStyles();
+                    });
+                    
+                    faultBtn.addEventListener('click', () => {
+                        currentStatus = 'Fault';
+                    updateButtonStyles();
+                  });
+                  
+                  // Initialize the button styles when the page loads
+                  updateButtonStyles();
+                });
+                </script>
+              
+            </div> 
+        </div>
+</div>
+                    <!-- Content Row -->
+                    <div class="row" style="width: 350vh;display: flex;">
+
+                        <!-- Content Column -->
+                        <div class="col-lg-6 mb-4"  style="width: 100%;">
+                            
+                            <!-- Project Card Example -->
+                            <!-- <div class="card shadow mb-4"  style="width: 100%;">
+                                <div class="card-header py-3"  style="width: 100%;">
+                                    <h6 class="m-0 font-weight-bold text-primary">Overall Performance</h6>
+                                </div>
+                                
+                                <div class="card-body" style="padding-bottom: 0px;padding-block: 0px">
+                                
+                                    <table style="width: 100%; border-collapse: collapse; margin-top: 0px;">
+                                        <thead>
+                                            <tr style="background-color: #007BFF; color: white;">
+                                                <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Date & Time</th>
+                                                <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Total Production</th>
+                                          <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Good Production</th>
+                                          <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Bad Production</th>
+                                        </tr>
+                                        <tr style="background-color: #007BFF; color: white;">
+                                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">12-02-25</th>
+                                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">500</th>
+                                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">445</th>
+                                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">55</th>
+                                        </tr>
+                                        <tr style="background-color: #007BFF; color: white;">
+                                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">13-02-25</th>
+                                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">200</th>
+                                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">165</th>
+                                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">35</th>
+                                        </tr>
+                                      </thead>
+                                      
+                                    </table>
+                                   
+    
+    
+                                
+                            </div>
+                            
+                          
+                               
+                                     
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div> 
+
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Illustrations -->
+                            
+
+                           
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <!-- <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div> -->
+            </footer>
+            <!-- End of Footer -->
+            
+        </div>
+        <!-- End of Content Wrapper -->
+        
+    </div>
+    <!-- End of Page Wrapper -->
+    
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        
+        @keyframes jumpEffect {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.5); }
+            60% { transform: scale(0.8); }
+            100% { transform: scale(1); }
+        }
+        
+        .highlighted-word {
+            display: inline-block;
+            background-color: rgb(59, 216, 255);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            animation: jumpEffect 0.6s ease-in-out;
+        }
+        </style>
+        
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.querySelector(".navbar-search input");
+            const searchButton = document.querySelector(".navbar-search button");
+        
+            function searchAndHighlight() {
+                const query = searchInput.value.trim().toLowerCase();
+                if (!query) return;
+        
+                // Remove previous highlights
+                document.querySelectorAll(".highlighted-word").forEach(el => {
+                    el.outerHTML = el.innerText;
+                });
+        
+                // Get all text elements
+                const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, div, span, p, td");
+                let foundElement = null;
+        
+                elements.forEach(el => {
+                    let text = el.innerHTML.toLowerCase();
+                    if (text.includes(query)) {
+                        // Highlight and animate the first found word
+                        const regex = new RegExp(`(${query})`, "i");
+                        el.innerHTML = el.innerHTML.replace(regex, `<span class="highlighted-word">$1</span>`);
+        
+                        // Store the first matched element for scrolling
+                        if (!foundElement) {
+                            foundElement = el.querySelector(".highlighted-word");
+                        }
+                    }
+                });
+        
+                if (foundElement) {
+                    foundElement.scrollIntoView({ behavior: "smooth", block: "center" });
+                } else {
+                    alert("No matching word found!");
+                }
+            }
+        
+            // Search on button click
+            searchButton.addEventListener("click", searchAndHighlight);
+            // Search on ENTER key press
+            searchInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    searchAndHighlight();
+                }
+            });
+        });
+        </script> -->
+        
+        
+        
+        
+        
+        
+        
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="script.js"></script>
+     
+</body>
+
+</html>

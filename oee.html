@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OEE Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- ✅ Ensure Chart.js is loaded -->
+    <script src="oee.js" defer></script>  <!-- ✅ Separate script for OEE chart -->
+</head>
+<body>
+<center><h1>OEE CHART</h1></center><br><br>
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4" style="height: 400px;">
+            <h4 style="font-size: 20px;padding-left: 80px;" class="font-weight-bold">
+                <span><button style="width: 20px; height: 20px; background-color:#FFC107; border: none; border-radius: 50%; cursor: pointer;"></button> Availability</span>
+                <span id="aval"></span>
+            </h4>
+            <h4 style="font-size: 20px;padding-left: 80px;" class="font-weight-bold">
+                <span><button style="width: 20px; height: 20px; background-color: #007BFF; border: none; border-radius: 50%; cursor: pointer;"></button></span> Performance: <span id="perf"></span>
+            </h4>
+            <h4 style="font-size: 20px;padding-left: 80px;" class="font-weight-bold">
+                <span><button style="width: 20px; height: 20px; background-color: green; border: none; border-radius: 50%; cursor: pointer;"></button></span> Quality: <span id="qual"></span>
+            </h4>
+            
+            <div style="width: 40%; margin: 20px auto; padding: 20px; border-radius: 8px; height: 60%; display: flex;">
+                <div style="display: flex; justify-content: center; align-items: center; width: 100%; min-height: 300px; margin-left: 200px; margin-top: -180px;">
+                    <canvas id="oeeChart" width="700" height="700"></canvas> <!-- ✅ Chart Canvas -->
+                </div> 
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
